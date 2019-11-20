@@ -28,11 +28,12 @@ BEGIN_MESSAGE_MAP(CMultiView, CView)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CView::OnFilePrintPreview)
 	ON_COMMAND(ID_32771, &CMultiView::OnFileFindmax)
-	ON_MESSAGE(WM_MAX, &CMultiView::OnMaxFound)
+	ON_MESSAGE(WM_MAX, OnMaxFound)
 END_MESSAGE_MAP()
 
-// CMultiView 생성/소멸
+// CMultiView 생성/소멸WM_MAX
 
+SData data;
 CMultiView::CMultiView() noexcept
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
@@ -133,11 +134,12 @@ void CMultiView::OnFileFindmax()
 }
 
 
-void CMultiView::OnMaxFound(WPARAM wParam, LPARAM lParam)
+LRESULT CMultiView::OnMaxFound(WPARAM wParam, LPARAM lParam)
 {
 	CClientDC dc(this);
 	CString msg;
 	msg.Format(L"%d", data.max);
 	dc.TextOut(10,100,msg);
 	TerminateThread(Thread, 0);
+	return 0;
 }

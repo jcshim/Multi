@@ -8,7 +8,6 @@ struct SData {
 	int max;
 	HWND NotifyWindow;
 };
-SData data;
 class CMultiView : public CView
 {
 protected: // serialization에서만 만들어집니다.
@@ -46,7 +45,7 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg void OnFileFindmax();
-	afx_msg void OnMaxFound(WPARAM wParam, LPARAM lParam);
+	LRESULT OnMaxFound(WPARAM wParam, LPARAM lParam);
 };
 
 #ifndef _DEBUG  // MultiView.cpp의 디버그 버전
